@@ -30,15 +30,16 @@ In Swagger: call `POST /api/auth/login`, copy the `token`, click **Authorize** a
 
 ## Scripts
 
-| Command                                                 | Description                                         |
-| ------------------------------------------------------- | --------------------------------------------------- |
-| `npm run dev`                                           | Start in watch mode                                 |
-| `npm run build` / `npm start`                           | Compile to `dist/` and run                          |
-| `npm test`                                              | Run all tests (in-memory MongoDB, no Docker needed) |
-| `npm run test:unit` / `test:integration` / `test:api`   | Run one test layer                                  |
-| `npm run test:coverage`                                 | Tests with coverage report                          |
-| `npm run lint` / `npm run format` / `npm run typecheck` | Code quality                                        |
-| `npm run seed:admin`                                    | Create or promote the admin user                    |
+| Command                                                 | Description                                                                        |
+| ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `npm run dev`                                           | Start in watch mode                                                                |
+| `npm run build` / `npm start`                           | Compile to `dist/` and run                                                         |
+| `npm test`                                              | Run all tests (in-memory MongoDB, no Docker needed)                                |
+| `npm run test:unit` / `test:integration` / `test:api`   | Run one test layer                                                                 |
+| `npm run test:coverage`                                 | Tests with coverage report                                                         |
+| `npm run lint` / `npm run format` / `npm run typecheck` | Code quality                                                                       |
+| `npm run seed:admin`                                    | Create or promote the admin user                                                   |
+| `npm run seed:demo`                                     | Load demo data: users `dana` / `noam` / `maya` (`@demo.dev`), password `Demo1234!` |
 
 ## Endpoints
 
