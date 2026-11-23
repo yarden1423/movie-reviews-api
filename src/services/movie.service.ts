@@ -5,6 +5,7 @@ import { paginate, type Paginated } from '../schemas/common.schema';
 import type { CreateMovieInput, ListMoviesQuery, UpdateMovieInput } from '../schemas/movie.schema';
 import { AppError } from '../utils/AppError';
 import { containsInsensitive } from '../utils/regex';
+import { reviewService } from './review.service';
 
 const OWNER_FIELDS = 'username';
 
@@ -81,6 +82,8 @@ async function update(id: string, input: UpdateMovieInput, user: AuthUser): Prom
 async function remove(id: string, user: AuthUser): Promise<void> {
   const movie = await findOrThrow(id);
   assertOwnerOrAdmin(user, movie.createdBy);
+  // Reviews cannot exist without their movie, so they are removed with it.
+  await reviewService.removeAllForMovie(movie.id);
   await movie.deleteOne();
 }
 
