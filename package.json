@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "seed:admin": "tsx src/scripts/seedAdmin.ts"
+    "seed:admin": "tsx src/scripts/seedAdmin.ts",
+    "seed:demo": "tsx src/scripts/seedDemo.ts"
   },
   "keywords": [],
   "author": "Yarden Nazaretsky & Amit Ben Izhak",
