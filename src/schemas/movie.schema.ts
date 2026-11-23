@@ -54,6 +54,13 @@ export const listMoviesQuerySchema = paginationQuerySchema.extend({
   sort: z.enum(sortValues).default('-createdAt'),
 });
 
+export const topRatedQuerySchema = z.object({
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  minReviews: z.coerce.number().int().min(0).default(1),
+  genre: z.enum(GENRES).optional(),
+});
+
 export type CreateMovieInput = z.infer<typeof createMovieSchema>;
 export type UpdateMovieInput = z.infer<typeof updateMovieSchema>;
 export type ListMoviesQuery = z.infer<typeof listMoviesQuerySchema>;
+export type TopRatedQuery = z.infer<typeof topRatedQuerySchema>;

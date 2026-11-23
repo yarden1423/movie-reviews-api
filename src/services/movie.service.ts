@@ -2,7 +2,12 @@ import type { FilterQuery, SortOrder } from 'mongoose';
 import { assertOwnerOrAdmin, type AuthUser } from '../middlewares/auth';
 import { Movie, TITLE_COLLATION, type MovieAttrs, type MovieDocument } from '../models/movie.model';
 import { paginate, type Paginated } from '../schemas/common.schema';
-import type { CreateMovieInput, ListMoviesQuery, UpdateMovieInput } from '../schemas/movie.schema';
+import type {
+  CreateMovieInput,
+  ListMoviesQuery,
+  TopRatedQuery,
+  UpdateMovieInput,
+} from '../schemas/movie.schema';
 import { AppError } from '../utils/AppError';
 import { containsInsensitive } from '../utils/regex';
 import { reviewService } from './review.service';
@@ -63,6 +68,23 @@ async function list(query: ListMoviesQuery): Promise<Paginated<MovieDocument>> {
   return paginate(items, total, query);
 }
 
+/**
+ * Highest rated movies. Ties are broken by number of reviews, so a movie rated
+ * by many people ranks above one with the same average from fewer reviews.
+ * Unrated movies are never included.
+ */
+async function topRated(query: TopRatedQuery): Promise<MovieDocument[]> {
+  const filter: FilterQuery<MovieAttrs> = {
+    reviewsCount: { $gte: Math.max(query.minReviews, 1) },
+  };
+  if (query.genre) filter.genres = query.genre;
+
+  return Movie.find(filter)
+    .sort({ averageRating: -1, reviewsCount: -1, _id: 1 })
+    .limit(query.limit)
+    .populate('createdBy', OWNER_FIELDS);
+}
+
 async function update(id: string, input: UpdateMovieInput, user: AuthUser): Promise<MovieDocument> {
   const movie = await findOrThrow(id);
   assertOwnerOrAdmin(user, movie.createdBy);
@@ -87,4 +109,4 @@ async function remove(id: string, user: AuthUser): Promise<void> {
   await movie.deleteOne();
 }
 
-export const movieService = { create, getById, list, update, remove };
+export const movieService = { create, getById, list, topRated, update, remove };

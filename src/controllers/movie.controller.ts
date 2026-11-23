@@ -1,11 +1,15 @@
 import type { Request, Response } from 'express';
 import { currentUser } from '../middlewares/auth';
-import type { ListMoviesQuery } from '../schemas/movie.schema';
+import type { ListMoviesQuery, TopRatedQuery } from '../schemas/movie.schema';
 import { movieService } from '../services/movie.service';
 
 export const movieController = {
   async list(req: Request, res: Response) {
     res.json(await movieService.list(req.query as unknown as ListMoviesQuery));
+  },
+
+  async topRated(req: Request, res: Response) {
+    res.json(await movieService.topRated(req.query as unknown as TopRatedQuery));
   },
 
   async getById(req: Request<{ id: string }>, res: Response) {
