@@ -11,6 +11,7 @@ import { idParamsSchema, paginationQuerySchema } from '../schemas/common.schema'
 import {
   createMovieSchema,
   listMoviesQuerySchema,
+  topRatedQuerySchema,
   updateMovieSchema,
 } from '../schemas/movie.schema';
 import { createReviewSchema, updateReviewSchema } from '../schemas/review.schema';
@@ -175,6 +176,18 @@ registry.registerPath({
     'sorting (`sort`, prefix with `-` for descending) and pagination.',
   request: { query: listMoviesQuerySchema },
   responses: { 200: ok('Paginated movies', paginated(Movie)), 400: E400 },
+});
+
+registry.registerPath({
+  method: 'get',
+  path: '/api/movies/top',
+  tags: ['Movies'],
+  summary: 'Top rated movies',
+  description:
+    'Highest average rating first; ties broken by number of reviews. ' +
+    'Only movies with at least `minReviews` reviews (and never unrated movies).',
+  request: { query: topRatedQuerySchema },
+  responses: { 200: ok('Top rated movies', z.array(Movie)), 400: E400 },
 });
 
 registry.registerPath({

@@ -24,6 +24,7 @@ describe('API documentation', () => {
         'GET /api/users/me',
         'GET /api/users/me/reviews',
         'GET /api/movies',
+        'GET /api/movies/top',
         'POST /api/movies',
         'GET /api/movies/{id}',
         'PATCH /api/movies/{id}',
