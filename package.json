@@ -1,0 +1,59 @@
+{
+  "name": "movie-reviews-api",
+  "version": "1.0.0",
+  "description": "REST API for movies and reviews (Node.js, Express, TypeScript, MongoDB, JWT, Swagger)",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:api": "jest tests/api",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "seed:admin": "tsx src/scripts/seedAdmin.ts"
+  },
+  "keywords": [],
+  "author": "Yarden Nazaretsky & Amit Ben Izhak",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "@asteasolutions/zod-to-openapi": "^7.3.4",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.5",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.11",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.6",
+    "@types/supertest": "^7.2.1",
+    "@types/swagger-ui-express": "^4.1.8",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "jest": "^30.5.2",
+    "mongodb-memory-server": "^11.4.0",
+    "prettier": "^3.10.1",
+    "supertest": "^7.3.2",
+    "ts-jest": "^29.4.15",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.74.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
