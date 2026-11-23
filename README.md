@@ -18,6 +18,7 @@ npm install
 cp .env.example .env          # then set a strong JWT_SECRET
 docker compose up -d          # MongoDB on localhost:27017
 npm run seed:admin            # creates the admin user from ADMIN_* in .env
+npm run seed:demo             # optional: demo users, movies and reviews
 npm run dev                   # http://localhost:3000
 ```
 
