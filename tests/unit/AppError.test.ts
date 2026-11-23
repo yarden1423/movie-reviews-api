@@ -2,12 +2,12 @@ import { AppError } from '../../src/utils/AppError';
 
 describe('AppError', () => {
   it.each([
-    ['badRequest', AppError.badRequest('x'), 400, 'BAD_REQUEST'],
-    ['unauthorized', AppError.unauthorized(), 401, 'UNAUTHORIZED'],
-    ['forbidden', AppError.forbidden(), 403, 'FORBIDDEN'],
-    ['notFound', AppError.notFound('Movie'), 404, 'NOT_FOUND'],
-    ['conflict', AppError.conflict('dup'), 409, 'CONFLICT'],
-  ])('%s() returns status %i with code %s', (_name, error, status, code) => {
+    ['badRequest', 400, 'BAD_REQUEST', AppError.badRequest('x')],
+    ['unauthorized', 401, 'UNAUTHORIZED', AppError.unauthorized()],
+    ['forbidden', 403, 'FORBIDDEN', AppError.forbidden()],
+    ['notFound', 404, 'NOT_FOUND', AppError.notFound('Movie')],
+    ['conflict', 409, 'CONFLICT', AppError.conflict('dup')],
+  ])('%s() returns status %i with code %s', (_name, status, code, error) => {
     expect(error).toBeInstanceOf(Error);
     expect(error.statusCode).toBe(status);
     expect(error.code).toBe(code);
